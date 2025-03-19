@@ -16,5 +16,7 @@ public:
     void AddChild(GameTree* child);
     void PrintGameTree(Graphics^ graphics, GameTree* node, int level, int width, int xOffset);
     void FullfillGameTreeBackup(GameTree* node, std::vector<int> data);
+    void GameFlow(GameTree* node);
+    void GameTreeCertainLevel(GameTree* node, std::vector<int> data, int level);
 };
 

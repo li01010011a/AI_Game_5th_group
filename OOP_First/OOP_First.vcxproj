@@ -118,22 +118,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="First.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameTree.cpp" />
     <ClCompile Include="MainForm.cpp" />
+    <ClCompile Include="PickPlayer.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="First.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameTree.h" />
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="PickPlayer.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PickPlayer.resx">
+      <DependentUpon>PickPlayer.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
