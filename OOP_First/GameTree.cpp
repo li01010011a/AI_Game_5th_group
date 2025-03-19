@@ -12,6 +12,8 @@ void GameTree::AddChild(GameTree* child) {
     children.push_back(child);
 }
 
+
+
 void GameTree::PrintGameTree(Graphics^ graphics, GameTree* node, int level, int width, int xOffset)
 {
     Font font("Arial", 9);
@@ -56,7 +58,7 @@ void GameTree::FullfillGameTreeBackup(GameTree* node, std::vector<int> data) {
     }
 }
 
-void GameTree::GameTreeCertainLevel(GameTree* node, std::vector<int> data, int level) {
+void GameTree::GameTreeCertainLevel(GameTree* node, GameTree* pickedNode, std::vector<int> data, int level) {
     for (int i = 0; i < data.size() - 1; i += 2) {
         std::vector<int> temporary = data;
         temporary[i] = temporary[i] + temporary[i + 1];
@@ -71,10 +73,11 @@ void GameTree::GameTreeCertainLevel(GameTree* node, std::vector<int> data, int l
         temporary.erase(temporary.begin() + data.size() - 1);
         node->AddChild(new GameTree(temporary));
     }
+	current_node = pickedNode;
 	if (level > 0) {
         level -= 1;
         for (GameTree* child : node->children) {
-            GameTreeCertainLevel(child, child->data, level);
+            GameTreeCertainLevel(child, pickedNode, child->data, level);
         }
 	}
     

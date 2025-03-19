@@ -23,7 +23,7 @@ namespace OOPFirst {
 			//
 		}
 	public:
-		System::String^ player;
+		int player; // 0 for player 1, 1 for player 2
 	protected:
 		/// <summary>
 		/// Clean up any resources being used.
@@ -89,6 +89,7 @@ namespace OOPFirst {
 			this->player2->TabIndex = 2;
 			this->player2->Text = L"Player 2";
 			this->player2->UseVisualStyleBackColor = false;
+			this->player2->Click += gcnew System::EventHandler(this, &PickPlayer::player2_Click);
 			// 
 			// PickPlayer
 			// 
@@ -107,7 +108,13 @@ namespace OOPFirst {
 #pragma endregion
 	private: System::Void player1_Click(System::Object^ sender, System::EventArgs^ e) {
 		label1->Text = "You are Player 1";
-		player = "Player 1";
+		player = 0;
+		PickPlayer::Hide();
+	}
+	private: System::Void player2_Click(System::Object^ sender, System::EventArgs^ e) {
+		label1->Text = "You are Player 2";
+		player = 1;
+		PickPlayer::Hide();
 	}
 	};
 }

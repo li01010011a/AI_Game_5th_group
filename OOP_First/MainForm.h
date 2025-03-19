@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include "Game.h"
 #include "PickPlayer.h"
+#include "Player.h"
 
 namespace OOPFirst {
 
@@ -52,6 +53,9 @@ namespace OOPFirst {
 	private: System::Windows::Forms::Button^ btn_show;
 	private: System::Windows::Forms::PictureBox^ frame_start_game;
 	public: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::TextBox^ user_number;
+	public:
+	private: System::Windows::Forms::Button^ btn_user_number;
 
 
 
@@ -86,6 +90,8 @@ namespace OOPFirst {
 			this->btn_show = (gcnew System::Windows::Forms::Button());
 			this->frame_start_game = (gcnew System::Windows::Forms::PictureBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->user_number = (gcnew System::Windows::Forms::TextBox());
+			this->btn_user_number = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->frame))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->frame_info))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->frame_author_info))->BeginInit();
@@ -192,11 +198,30 @@ namespace OOPFirst {
 			this->label1->Text = L"Win Count: AI/Human";
 			this->label1->Visible = false;
 			// 
+			// user_number
+			// 
+			this->user_number->Location = System::Drawing::Point(521, 10);
+			this->user_number->Name = L"user_number";
+			this->user_number->Size = System::Drawing::Size(169, 26);
+			this->user_number->TabIndex = 10;
+			// 
+			// btn_user_number
+			// 
+			this->btn_user_number->Location = System::Drawing::Point(707, 12);
+			this->btn_user_number->Name = L"btn_user_number";
+			this->btn_user_number->Size = System::Drawing::Size(115, 24);
+			this->btn_user_number->TabIndex = 11;
+			this->btn_user_number->Text = L"Choose number";
+			this->btn_user_number->UseVisualStyleBackColor = true;
+			this->btn_user_number->Click += gcnew System::EventHandler(this, &MainForm::btn_user_number_Click);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1536, 866);
+			this->Controls->Add(this->btn_user_number);
+			this->Controls->Add(this->user_number);
 			this->Controls->Add(this->frame);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->btn_show);
@@ -222,8 +247,12 @@ namespace OOPFirst {
 
 		}
 #pragma endregion
+
+	Game* g = new Game();
+	GameTree* root;
+
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		Game g;
+		//Game g;
 		Graphics^ grp = frame->CreateGraphics();
 		Graphics^ grp_info = frame_info->CreateGraphics();
 		Graphics^ grp_author_info = frame_author_info->CreateGraphics();
@@ -235,14 +264,16 @@ namespace OOPFirst {
 		grp_author_info->Clear(Color::PaleGoldenrod);
 		grp_side_info->Clear(Color::SlateBlue);
 		System::String^ user_input = textBox1->Text;
-		Int32::TryParse(user_input, g.random_array_size);
-		g.randoms = g.GenerateRandomNums(g.random_array_size);
-		g.PrintIntVector(grp_info, g.randoms, (frame_info->Width) / 4, (frame_info->Height) / 2, 0, 0, 0);
+		Int32::TryParse(user_input, g->random_array_size);
+		g->randoms = g->GenerateRandomNums(g->random_array_size);
+		g->PrintIntVector(grp_info, g->randoms, (frame_info->Width) / 4, (frame_info->Height) / 2, 0, 0, 0);
 		
-		g.PrintStringAsCharArray(grp_author_info, "Author: 5th Group", 50, (frame_author_info->Height/10));
-		GameTree* root = new GameTree(g.randoms);
-		//root->FullfillGameTreeBackup(root, g.randoms);
-		root->GameTreeCertainLevel(root, g.randoms, 2);
+		g->PrintStringAsCharArray(grp_author_info, "Author: 5th Group", 50, (frame_author_info->Height/10));
+		root = new GameTree(g->randoms);
+		root->FullfillGameTreeBackup(root, g->randoms);
+		root->current_node = new GameTree(root->data);
+		root->current_node->GameTreeCertainLevel(root->current_node, root, root->current_node->data, 0); // 0  level will display only root childs
+		//root->GameTreeCertainLevel(root,root, g->randoms, 0); // 0  level will display only root childs
 		root->PrintGameTree(grp, root, 0, (1280 - 50) / 3, 0);
 
 	}
@@ -267,8 +298,43 @@ private: System::Void frame_start_game_Click(System::Object^ sender, System::Eve
 	frame_start_game->Visible = false;
 	PickPlayer^ pickPlayer = gcnew PickPlayer();
 	pickPlayer->ShowDialog();
-	label1->Text = pickPlayer->player;
+	label1->Text = pickPlayer->player.ToString();
+	Player* human = new Player(0, (pickPlayer->player==0)?1:0);
+	Player* ai = new Player(0, (pickPlayer->player == 0) ? 0 : 1);
 }
+	   // user picks one of child nodes there 
+private: System::Void btn_user_number_Click(System::Object^ sender, System::EventArgs^ e) {
+	System::String^ user_choice = user_number->Text;
+	int user_number;
+	Int32::TryParse(user_choice, user_number);
+	//Game g;
+	Graphics^ grp = frame->CreateGraphics();
+	grp->Clear(Color::White);
+	System::String^ user_input = textBox1->Text;
+	Int32::TryParse(user_input, g->random_array_size);
+	g -> randoms = g->GenerateRandomNums(g->random_array_size);
 
+	//GameTree* root = new GameTree(g->randoms);
+	//root->FullfillGameTreeBackup(root, g->randoms);
+	//root->GameTreeCertainLevel(root, root, g->randoms, 0); // 0  level will display only root childs
+	//root->PrintGameTree(grp, root, 0, (1280 - 50) / 3, 0);
+	if (root->current_node->data.size() > 2) {
+		grp->Clear(Color::White);
+		std::vector<int> temp_data = root->current_node->children[user_number - 1]->data;
+		root->current_node->children.clear();
+		root->current_node->GameTreeCertainLevel(root->current_node, root, temp_data, 0); // 0  level will display only root childs
+		root->current_node->data = temp_data;
+		root->PrintGameTree(grp, root->current_node, 0, (1280 - 50) / 3, 0);
+		
+		//root->current_node->children = 
+		//root->current_node->children.clear();
+		
+	}
+	//else {
+
+	//}
+	
+	
+}
 };
 }
