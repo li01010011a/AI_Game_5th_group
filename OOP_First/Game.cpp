@@ -7,7 +7,7 @@
 using namespace System;
 
 void Game::PrintIntVector(Graphics^ graphics, std::vector<int> randoms, int width, int height, int R, int G, int B) {
-	Font font("Arial", 30);
+	Font font("Arial", 15);
 	SolidBrush brush(Color::FromArgb(R, G, B));
 
 	System::String^ s = "Random Array: ";
@@ -26,7 +26,7 @@ void Game::PrintIntVector(Graphics^ graphics, std::vector<int> randoms, int widt
 }
 
 void Game::PrintStringAsCharArray(Graphics^ graphics, System::String^ s, int width, int height){
-	Font font("Arial", 30);
+	Font font("Arial", 20);
 	int R = 25, G = 70, B = 90;
 	SolidBrush brush(Color::FromArgb(R, G, B));
 

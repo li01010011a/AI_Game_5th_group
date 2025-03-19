@@ -14,7 +14,7 @@ void GameTree::AddChild(GameTree* child) {
 
 void GameTree::PrintGameTree(Graphics^ graphics, GameTree* node, int level, int width, int xOffset)
 {
-    Font font("Arial", 11);
+    Font font("Arial", 9);
     //SolidBrush brush(Color::Black);  
     int R = (level%2==0?255:0), G = 0, B = (level % 2 == 0 ? 0 : 255);
     
@@ -22,7 +22,7 @@ void GameTree::PrintGameTree(Graphics^ graphics, GameTree* node, int level, int 
     int height = 10 + level * 20;
 
     for (int i = 0; i < node->data.size(); i++) {
-        graphics->DrawString(node->data.at(i).ToString(), % font, % brush, width + xOffset  + i*8, height);
+        graphics->DrawString(node->data.at(i).ToString(), % font, % brush, width + xOffset  + i*5, height);
         graphics->DrawString((level%2==0)?"---Max":"---Min", % font, % brush, 750, height);
 
     }
@@ -54,4 +54,34 @@ void GameTree::FullfillGameTreeBackup(GameTree* node, std::vector<int> data) {
     for (GameTree* child : node->children) {
         FullfillGameTreeBackup(child, child->data);
     }
+}
+
+void GameTree::GameTreeCertainLevel(GameTree* node, std::vector<int> data, int level) {
+    for (int i = 0; i < data.size() - 1; i += 2) {
+        std::vector<int> temporary = data;
+        temporary[i] = temporary[i] + temporary[i + 1];
+        if (temporary[i] > 6) {
+            temporary[i] = temporary[i] - 6;
+        }
+        temporary.erase(temporary.begin() + i + 1);
+        node->AddChild(new GameTree(temporary));
+    }
+    if (data.size() % 2 == 1 && data.size() != 1) {
+        std::vector<int> temporary = data;
+        temporary.erase(temporary.begin() + data.size() - 1);
+        node->AddChild(new GameTree(temporary));
+    }
+	if (level > 0) {
+        level -= 1;
+        for (GameTree* child : node->children) {
+            GameTreeCertainLevel(child, child->data, level);
+        }
+	}
+    
+}
+
+void GameTree::GameFlow(GameTree* node) {
+	for (GameTree* child : node->children) {
+		GameFlow(child);
+	}
 }
