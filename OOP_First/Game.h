@@ -15,6 +15,6 @@ public:
 	int random_array_size;
 	std::vector<int> randoms;
 	void PrintStringAsCharArray(Graphics^ graphics, System::String^ s, int width, int height);
-
+	int game_count=0;
 };
 

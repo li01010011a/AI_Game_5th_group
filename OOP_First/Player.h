@@ -5,8 +5,16 @@
 
 class Player
 {
-	int score;
-	bool isFirstPlayer;
-
+public:
+	int score = 0;
+	bool isFirstPlayer = 0; //1 for Max Player
+	bool isCurrentPlayer;
+	int winCount=0;
+	Player(int score, bool isFirstPlayer) {
+		this->score = score;
+		this->isFirstPlayer = isFirstPlayer;
+	}
+	void AddPoint();
+	void MinusPoint();
 };
 
