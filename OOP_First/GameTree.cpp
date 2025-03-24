@@ -16,7 +16,6 @@ void GameTree::AddChild(GameTree* child) {
 void GameTree::PrintGameTreeUserScore(Graphics^ graphics, GameTree* node, int level, int width, int xOffset)
 {
     Font font("Arial", 9);
-    //SolidBrush brush(Color::Black);  
     int R = (level % 2 == 0 ? 255 : 0), G = 0, B = (level % 2 == 0 ? 0 : 255);
 
     SolidBrush brush(Color::FromArgb(R, G, B));
@@ -26,6 +25,9 @@ void GameTree::PrintGameTreeUserScore(Graphics^ graphics, GameTree* node, int le
 
     graphics->DrawString("With That Color Marked Win Path(Human) If Exists", % font, % brush_win, 50, 200);
     graphics->DrawString(node->nodeValueForAI.ToString(), % font, % brush_score, width + xOffset - 7, height);
+    //graphics->DrawString(node->alphaBetaValue.ToString(), % font, % brush_score, width + xOffset - 7, height + 10);
+    graphics->DrawString(node->miniMaxValue.ToString(), % font, % brush_score, width + xOffset - 7+10, height + 10);
+
     for (int i = 0; i < node->data.size(); i++) {
         
         graphics->DrawString(node->data.at(i).ToString(), % font, node->isWinPath == 1 ? % brush_win : % brush, width + xOffset + i * 5, height);
@@ -166,7 +168,7 @@ void GameTree::FullfillGameTreeWithScores(GameTree* node, std::vector<int> data,
     }
 }
 
-void GameTree::FullfillGameTreeBackup(GameTree* node, std::vector<int> data) {
+void GameTree::FullfillGameTree(GameTree* node, std::vector<int> data) {
     for (int i = 0; i < data.size()-1; i += 2) {
         std::vector<int> temporary = data;
         temporary[i] = temporary[i] + temporary[i + 1];
@@ -182,7 +184,7 @@ void GameTree::FullfillGameTreeBackup(GameTree* node, std::vector<int> data) {
 		node->AddChild(new GameTree(temporary));
     }
     for (GameTree* child : node->children) {
-        FullfillGameTreeBackup(child, child->data);
+        FullfillGameTree(child, child->data);
     }
 }
 
@@ -315,10 +317,91 @@ void GameTree::GameTreeCertainLevel(GameTree* node, std::vector<int> data, int l
     
 }
 
+void GameTree::RateGameTreeAlphaBeta(GameTree* node, int level) {
+        level += 1;
+        for (GameTree* child : node->children) {
+            int current = child->alphaBetaValue;
+            
+            RateGameTreeAlphaBeta(child, level);
+            current = child->alphaBetaValue;
+            if (current != -2) {
+                child->parent_node->alphaBetaValue = current;
+                if (current == 1 && node->alphaBetaValue == -1) {
+                    if (level % 2 == 1) {
+                        //max level
+                        node->alphaBetaValue == current;
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (current == -1 && node->alphaBetaValue == 1) {
+                    if (level % 2 == 0) {
+                        node->alphaBetaValue == current; //change 1 to -1 if min level
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (node->alphaBetaValue < current) {
+                    node->alphaBetaValue = current;
+                }
+            }
+        }
+}
+
+void GameTree::RateGameTreeMiniMax(GameTree* node, int level) {
+    level += 1;
+    for (GameTree* child : node->children) {
+        int current = child->miniMaxValue;
+
+        RateGameTreeMiniMax(child, level);
+        current = child->miniMaxValue;
+        if (current != -2) {
+            child->parent_node->miniMaxValue = current;
+            if (current == 1 && node->miniMaxValue == -1) {
+                if (level % 2 == 1) {
+                    //max level
+                    node->miniMaxValue == current;
+                }
+            }
+            else if (current == -1 && node->miniMaxValue == 1) {
+                if (level % 2 == 0) {
+                    node->miniMaxValue == current; //change 1 to -1 if min level
+                }
+            }
+            else if (node->miniMaxValue < current) {
+                node->miniMaxValue = current;
+            }
+        }
+    }
+}
+
+void GameTree::MarkLowestNodes(GameTree* node) { //marks lowest nodes (1, 0, -1) according to game rules
+    if (node->children.size() == 0) {
+        if (node->nodeValueForAI < node->nodeValueForHuman) {//human wins
+            node->alphaBetaValue = 1;
+            node->miniMaxValue = 1;
+        }
+        else if (node->nodeValueForAI == node->nodeValueForHuman) {
+            node->alphaBetaValue = 0;
+            node->miniMaxValue = 0;
+        }
+        else {
+            node->alphaBetaValue = -1;
+            node->miniMaxValue = -1;
+        }
+    }
+    else {
+        for (GameTree* child : node->children) {
+            MarkLowestNodes(child);
+        }
+    }
+}
+
 void GameTree::MarkWinNodes(GameTree* node) {
 	if (node->children.size() == 0) {
 		if (node->nodeValueForAI < node->nodeValueForHuman) {//human wins
-        //if (node->nodeValueForHuman>1) {
 			node->isWinPath = 1;
 			node->MarkWinPath(node);
 		}
@@ -334,40 +417,8 @@ void GameTree::MarkWinNodes(GameTree* node) {
 }
 
 void GameTree::MarkWinPath(GameTree* node) {
-	//if (node->isWinPath == 1) {
 		if (node->isRoot != 1) {
 			node->isWinPath = 1;
 			MarkWinPath(node->parent_node);
 		}
-	//}
-}
-
-// if isFirstPlayer is true, then it is human player (bool==1) 
-// mb makes sence to change it later
-//void GameTree::AddNodeValue(GameTree* node, Player* player) {
-//	if (player->isFirstPlayer) {
-//		node->nodeValueForHuman += 1;
-//	}
-//	else {
-//		node->nodeValueForAI += 1;
-//	}
-//}
-
-//void GameTree::MinusNodeValue(GameTree* node, Player* player) {
-//	if (player->isFirstPlayer) {
-//		if (node->nodeValueForHuman > 0) {
-//			node->nodeValueForHuman -= 1;
-//		}
-//	}
-//	else {
-//		if (node->nodeValueForAI > 0) {
-//			node->nodeValueForAI -= 1;
-//		}
-//	}
-//}
-
-void GameTree::GameFlow(GameTree* node) {
-	for (GameTree* child : node->children) {
-		GameFlow(child);
-	}
 }

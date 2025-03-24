@@ -70,6 +70,17 @@ namespace OOPFirst {
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Label^ game_count_label;
 	private: System::Windows::Forms::Label^ label5;
+	private: System::Windows::Forms::Label^ label6;
+	private: System::Windows::Forms::PictureBox^ game_prediction_frame;
+
+	private: System::Windows::Forms::Label^ label7;
+	private: System::Windows::Forms::Label^ minimaxname;
+	private: System::Windows::Forms::Label^ mini_max_pred_label;
+	private: System::Windows::Forms::Label^ alpha_beta_pred;
+	private: System::Windows::Forms::Label^ alpha_beta_pred_label;
+	private: System::Windows::Forms::Label^ label8;
+	private: System::Windows::Forms::Label^ label9;
+	private: System::Windows::Forms::Label^ label10;
 
 
 
@@ -119,11 +130,22 @@ namespace OOPFirst {
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->game_count_label = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->game_prediction_frame = (gcnew System::Windows::Forms::PictureBox());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->minimaxname = (gcnew System::Windows::Forms::Label());
+			this->mini_max_pred_label = (gcnew System::Windows::Forms::Label());
+			this->alpha_beta_pred = (gcnew System::Windows::Forms::Label());
+			this->alpha_beta_pred_label = (gcnew System::Windows::Forms::Label());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->label10 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->frame))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->frame_info))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->frame_author_info))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->frame_side_info))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->frame_start_game))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->game_prediction_frame))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// button1
@@ -177,9 +199,9 @@ namespace OOPFirst {
 			// 
 			// frame_side_info
 			// 
-			this->frame_side_info->Location = System::Drawing::Point(1268, 50);
+			this->frame_side_info->Location = System::Drawing::Point(1268, 53);
 			this->frame_side_info->Name = L"frame_side_info";
-			this->frame_side_info->Size = System::Drawing::Size(269, 490);
+			this->frame_side_info->Size = System::Drawing::Size(269, 267);
 			this->frame_side_info->TabIndex = 5;
 			this->frame_side_info->TabStop = false;
 			// 
@@ -219,7 +241,7 @@ namespace OOPFirst {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Consolas", 10, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Underline)),
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(1268, 118);
+			this->label1->Location = System::Drawing::Point(1269, 142);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(263, 23);
 			this->label1->TabIndex = 9;
@@ -286,7 +308,7 @@ namespace OOPFirst {
 			this->wins_label->Font = (gcnew System::Drawing::Font(L"Elephant", 9.999999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->wins_label->ForeColor = System::Drawing::Color::IndianRed;
-			this->wins_label->Location = System::Drawing::Point(1293, 211);
+			this->wins_label->Location = System::Drawing::Point(1285, 241);
 			this->wins_label->Name = L"wins_label";
 			this->wins_label->Size = System::Drawing::Size(30, 26);
 			this->wins_label->TabIndex = 16;
@@ -298,7 +320,7 @@ namespace OOPFirst {
 			this->max_player_label->AutoSize = true;
 			this->max_player_label->Font = (gcnew System::Drawing::Font(L"Elephant", 11, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->max_player_label->Location = System::Drawing::Point(1274, 63);
+			this->max_player_label->Location = System::Drawing::Point(1274, 104);
 			this->max_player_label->Name = L"max_player_label";
 			this->max_player_label->Size = System::Drawing::Size(143, 29);
 			this->max_player_label->TabIndex = 17;
@@ -308,7 +330,7 @@ namespace OOPFirst {
 			// ai_score_label
 			// 
 			this->ai_score_label->AutoSize = true;
-			this->ai_score_label->Location = System::Drawing::Point(1294, 152);
+			this->ai_score_label->Location = System::Drawing::Point(1294, 185);
 			this->ai_score_label->Name = L"ai_score_label";
 			this->ai_score_label->Size = System::Drawing::Size(21, 20);
 			this->ai_score_label->TabIndex = 18;
@@ -317,7 +339,7 @@ namespace OOPFirst {
 			// human_score_label
 			// 
 			this->human_score_label->AutoSize = true;
-			this->human_score_label->Location = System::Drawing::Point(1386, 152);
+			this->human_score_label->Location = System::Drawing::Point(1374, 185);
 			this->human_score_label->Name = L"human_score_label";
 			this->human_score_label->Size = System::Drawing::Size(21, 20);
 			this->human_score_label->TabIndex = 19;
@@ -326,7 +348,7 @@ namespace OOPFirst {
 			// draw_score_label
 			// 
 			this->draw_score_label->AutoSize = true;
-			this->draw_score_label->Location = System::Drawing::Point(1478, 152);
+			this->draw_score_label->Location = System::Drawing::Point(1463, 185);
 			this->draw_score_label->Name = L"draw_score_label";
 			this->draw_score_label->Size = System::Drawing::Size(18, 20);
 			this->draw_score_label->TabIndex = 20;
@@ -337,7 +359,7 @@ namespace OOPFirst {
 			this->label3->AutoSize = true;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Elephant", 9.999999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label3->Location = System::Drawing::Point(1275, 253);
+			this->label3->Location = System::Drawing::Point(1274, 279);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(150, 26);
 			this->label3->TabIndex = 21;
@@ -346,7 +368,7 @@ namespace OOPFirst {
 			// game_count_label
 			// 
 			this->game_count_label->AutoSize = true;
-			this->game_count_label->Location = System::Drawing::Point(1431, 257);
+			this->game_count_label->Location = System::Drawing::Point(1430, 283);
 			this->game_count_label->Name = L"game_count_label";
 			this->game_count_label->Size = System::Drawing::Size(18, 20);
 			this->game_count_label->TabIndex = 22;
@@ -357,17 +379,128 @@ namespace OOPFirst {
 			this->label5->AutoSize = true;
 			this->label5->Font = (gcnew System::Drawing::Font(L"Elephant", 9.999999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label5->Location = System::Drawing::Point(1270, 185);
+			this->label5->Location = System::Drawing::Point(1274, 215);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(154, 26);
 			this->label5->TabIndex = 23;
 			this->label5->Text = L"Game result:";
+			this->label5->Click += gcnew System::EventHandler(this, &MainForm::label5_Click);
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Font = (gcnew System::Drawing::Font(L"Elephant", 12, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Underline)),
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->label6->Location = System::Drawing::Point(1273, 63);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(192, 31);
+			this->label6->TabIndex = 24;
+			this->label6->Text = L"GAME INFO";
+			// 
+			// game_prediction_frame
+			// 
+			this->game_prediction_frame->Location = System::Drawing::Point(1268, 326);
+			this->game_prediction_frame->Name = L"game_prediction_frame";
+			this->game_prediction_frame->Size = System::Drawing::Size(269, 214);
+			this->game_prediction_frame->TabIndex = 25;
+			this->game_prediction_frame->TabStop = false;
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->Font = (gcnew System::Drawing::Font(L"Elephant", 9.999999F, System::Drawing::FontStyle::Underline, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label7->Location = System::Drawing::Point(1276, 342);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(244, 26);
+			this->label7->TabIndex = 26;
+			this->label7->Text = L"Game prediction using:";
+			this->label7->Click += gcnew System::EventHandler(this, &MainForm::label7_Click);
+			// 
+			// minimaxname
+			// 
+			this->minimaxname->AutoSize = true;
+			this->minimaxname->Font = (gcnew System::Drawing::Font(L"Elephant", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->minimaxname->Location = System::Drawing::Point(1277, 377);
+			this->minimaxname->Name = L"minimaxname";
+			this->minimaxname->Size = System::Drawing::Size(103, 24);
+			this->minimaxname->TabIndex = 27;
+			this->minimaxname->Text = L"MiniMax: ";
+			// 
+			// mini_max_pred_label
+			// 
+			this->mini_max_pred_label->AutoSize = true;
+			this->mini_max_pred_label->Location = System::Drawing::Point(1414, 377);
+			this->mini_max_pred_label->Name = L"mini_max_pred_label";
+			this->mini_max_pred_label->Size = System::Drawing::Size(21, 20);
+			this->mini_max_pred_label->TabIndex = 28;
+			this->mini_max_pred_label->Text = L"...";
+			// 
+			// alpha_beta_pred
+			// 
+			this->alpha_beta_pred->AutoSize = true;
+			this->alpha_beta_pred->Font = (gcnew System::Drawing::Font(L"Elephant", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->alpha_beta_pred->Location = System::Drawing::Point(1277, 414);
+			this->alpha_beta_pred->Name = L"alpha_beta_pred";
+			this->alpha_beta_pred->Size = System::Drawing::Size(111, 24);
+			this->alpha_beta_pred->TabIndex = 29;
+			this->alpha_beta_pred->Text = L"AlphaBeta:";
+			// 
+			// alpha_beta_pred_label
+			// 
+			this->alpha_beta_pred_label->AutoSize = true;
+			this->alpha_beta_pred_label->Location = System::Drawing::Point(1414, 414);
+			this->alpha_beta_pred_label->Name = L"alpha_beta_pred_label";
+			this->alpha_beta_pred_label->Size = System::Drawing::Size(21, 20);
+			this->alpha_beta_pred_label->TabIndex = 30;
+			this->alpha_beta_pred_label->Text = L"...";
+			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->Location = System::Drawing::Point(1307, 438);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(65, 20);
+			this->label8->TabIndex = 31;
+			this->label8->Text = L"0 - draw";
+			// 
+			// label9
+			// 
+			this->label9->AutoSize = true;
+			this->label9->Location = System::Drawing::Point(1307, 458);
+			this->label9->Name = L"label9";
+			this->label9->Size = System::Drawing::Size(115, 20);
+			this->label9->TabIndex = 32;
+			this->label9->Text = L"1 - human wins";
+			// 
+			// label10
+			// 
+			this->label10->AutoSize = true;
+			this->label10->Location = System::Drawing::Point(1301, 478);
+			this->label10->Name = L"label10";
+			this->label10->Size = System::Drawing::Size(87, 20);
+			this->label10->TabIndex = 33;
+			this->label10->Text = L"-1 - AI wins";
+			this->label10->Click += gcnew System::EventHandler(this, &MainForm::label10_Click);
 			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1536, 866);
+			this->Controls->Add(this->frame_start_game);
+			this->Controls->Add(this->label10);
+			this->Controls->Add(this->label9);
+			this->Controls->Add(this->label8);
+			this->Controls->Add(this->alpha_beta_pred_label);
+			this->Controls->Add(this->alpha_beta_pred);
+			this->Controls->Add(this->mini_max_pred_label);
+			this->Controls->Add(this->minimaxname);
+			this->Controls->Add(this->label7);
+			this->Controls->Add(this->game_prediction_frame);
+			this->Controls->Add(this->label6);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->game_count_label);
 			this->Controls->Add(this->label3);
@@ -391,7 +524,6 @@ namespace OOPFirst {
 			this->Controls->Add(this->frame_info);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->button1);
-			this->Controls->Add(this->frame_start_game);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Fixed3D;
 			this->Name = L"MainForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
@@ -402,6 +534,7 @@ namespace OOPFirst {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->frame_author_info))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->frame_side_info))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->frame_start_game))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->game_prediction_frame))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -436,17 +569,21 @@ namespace OOPFirst {
 		root = new GameTree(g->randoms);
 
 		//root->FullfillGameTreeWithScoresMiniMax(root, g->randoms, (human->isFirstPlayer?0:1), 0, 0);
-		root->GameTreeCertainLevelWithScoresAlphaBeta(root, g->randoms,2, (human->isFirstPlayer ? 0 : 1), 0, 0);
+		root->GameTreeCertainLevelWithScoresAlphaBeta(root, g->randoms,5, (human->isFirstPlayer ? 0 : 1), 0, 0);
 		root->isRoot = 1;
 		root->initialVectorSize = g->randoms.size();
 		//root->GameTreeCertainLevelWithScores(root,g->randoms, 1, 0, 0, 0);
 		root->MarkWinNodes(root);
+		root->MarkLowestNodes(root);
+		root->RateGameTreeMiniMax(root, 0);
+		root->RateGameTreeAlphaBeta(root, 0);
 		root->current_node = new GameTree(root->data);
-		root->current_node->GameTreeCertainLevel(root->current_node, root->current_node->data, 0); // 0  level will display only root childs
+		root->current_node->GameTreeCertainLevel(root->current_node, root->current_node->data, 1); // 0  level will display only root childs
 		//root->GameTreeCertainLevel(root,root, g->randoms, 0); // 0  level will display only root childs
 		//root->PrintGameTree(grp, root, 0, (1280 - 50) / 3, 0);
 		root->PrintGameTreeUserScore(grp, root, 2, (1280 - 50) / 3, 0);
-		
+		mini_max_pred_label->Text = root->miniMaxValue.ToString();
+		alpha_beta_pred_label->Text = root->alphaBetaValue.ToString();
 	}
 	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
 		/*Game first;
@@ -460,11 +597,13 @@ namespace OOPFirst {
 private: System::Void btn_delete_Click(System::Object^ sender, System::EventArgs^ e) {
 	frame_side_info->Visible = false;
 }
-private: System::Void btn_show_Click(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void btn_show_Click(System::Object^ sender, System::EventArgs^ e) {//restart game
 	frame_side_info->Visible = true;
 	Graphics^ grp_side_info = frame_side_info->CreateGraphics();
 	grp_side_info->Clear(Color::SlateBlue);
 	frame_start_game->Visible = true;
+	g->game_count++;
+	game_count_label->Text = g->game_count.ToString();
 }
 
 private: System::Void frame_start_game_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -514,6 +653,8 @@ private: System::Void btn_user_number_Click(System::Object^ sender, System::Even
 		//root->current_node->GameTreeCertainLevelMiniMax(root->current_node, temp_data, 0); // 0  level will display only root childs
 		root->current_node->GameTreeCertainLevelWithScoresAlphaBeta(root->current_node, temp_data, 1, (human->isFirstPlayer ? 0 : 1), 0, 0);
 		root->current_node->data = temp_data;
+		// ai turn
+
 		root->PrintGameTree(grp, root->current_node, 0, (1280 - 50) / 3, 0);
 		//root->PrintGameTreeUserScore(grp, root->current_node, 0, (1280 - 50) / 3, 0);
 	}
@@ -547,6 +688,12 @@ private: System::Void max_player_label_Click(System::Object^ sender, System::Eve
 private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void wins_label_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void label5_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void label7_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void label10_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

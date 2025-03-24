@@ -6,7 +6,7 @@
 class Player
 {
 public:
-	int score;
+	int score = 0;
 	bool isFirstPlayer = 0; //1 for Max Player
 	bool isCurrentPlayer;
 	int winCount=0;
