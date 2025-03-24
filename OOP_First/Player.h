@@ -7,7 +7,9 @@ class Player
 {
 public:
 	int score;
-	bool isFirstPlayer;
+	bool isFirstPlayer = 0; //1 for Max Player
+	bool isCurrentPlayer;
+	int winCount=0;
 	Player(int score, bool isFirstPlayer) {
 		this->score = score;
 		this->isFirstPlayer = isFirstPlayer;
