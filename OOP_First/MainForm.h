@@ -81,6 +81,14 @@ namespace OOPFirst {
 	private: System::Windows::Forms::Label^ label8;
 	private: System::Windows::Forms::Label^ label9;
 	private: System::Windows::Forms::Label^ label10;
+	private: System::Windows::Forms::TextBox^ level_tree_user;
+	private: System::Windows::Forms::Label^ label11;
+	private: System::Windows::Forms::Label^ label12;
+	private: System::Windows::Forms::Label^ ai_choice_label;
+	private: System::Windows::Forms::Label^ label13;
+	private: System::Windows::Forms::Label^ algorithm_label;
+
+
 
 
 
@@ -140,6 +148,12 @@ namespace OOPFirst {
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->label9 = (gcnew System::Windows::Forms::Label());
 			this->label10 = (gcnew System::Windows::Forms::Label());
+			this->level_tree_user = (gcnew System::Windows::Forms::TextBox());
+			this->label11 = (gcnew System::Windows::Forms::Label());
+			this->label12 = (gcnew System::Windows::Forms::Label());
+			this->ai_choice_label = (gcnew System::Windows::Forms::Label());
+			this->label13 = (gcnew System::Windows::Forms::Label());
+			this->algorithm_label = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->frame))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->frame_info))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->frame_author_info))->BeginInit();
@@ -150,7 +164,7 @@ namespace OOPFirst {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(326, 3);
+			this->button1->Location = System::Drawing::Point(297, 4);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(176, 41);
 			this->button1->TabIndex = 0;
@@ -175,10 +189,11 @@ namespace OOPFirst {
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(26, 10);
+			this->textBox1->Location = System::Drawing::Point(174, 11);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(294, 26);
+			this->textBox1->Size = System::Drawing::Size(117, 26);
 			this->textBox1->TabIndex = 2;
+			this->textBox1->TextChanged += gcnew System::EventHandler(this, &MainForm::textBox1_TextChanged);
 			// 
 			// frame_info
 			// 
@@ -485,12 +500,81 @@ namespace OOPFirst {
 			this->label10->Text = L"-1 - AI wins";
 			this->label10->Click += gcnew System::EventHandler(this, &MainForm::label10_Click);
 			// 
+			// level_tree_user
+			// 
+			this->level_tree_user->Location = System::Drawing::Point(68, 12);
+			this->level_tree_user->Name = L"level_tree_user";
+			this->level_tree_user->Size = System::Drawing::Size(100, 26);
+			this->level_tree_user->TabIndex = 34;
+			// 
+			// label11
+			// 
+			this->label11->AutoSize = true;
+			this->label11->Location = System::Drawing::Point(2, 15);
+			this->label11->Name = L"label11";
+			this->label11->Size = System::Drawing::Size(40, 20);
+			this->label11->TabIndex = 35;
+			this->label11->Text = L"level";
+			// 
+			// label12
+			// 
+			this->label12->AutoSize = true;
+			this->label12->Font = (gcnew System::Drawing::Font(L"Elephant", 12, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Underline)),
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->label12->Location = System::Drawing::Point(988, 470);
+			this->label12->Name = L"label12";
+			this->label12->Size = System::Drawing::Size(158, 31);
+			this->label12->TabIndex = 36;
+			this->label12->Text = L"AI Choice: ";
+			this->label12->Click += gcnew System::EventHandler(this, &MainForm::label12_Click);
+			// 
+			// ai_choice_label
+			// 
+			this->ai_choice_label->AutoSize = true;
+			this->ai_choice_label->Font = (gcnew System::Drawing::Font(L"Elephant", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->ai_choice_label->ForeColor = System::Drawing::Color::CadetBlue;
+			this->ai_choice_label->Location = System::Drawing::Point(1133, 470);
+			this->ai_choice_label->Name = L"ai_choice_label";
+			this->ai_choice_label->Size = System::Drawing::Size(38, 31);
+			this->ai_choice_label->TabIndex = 37;
+			this->ai_choice_label->Text = L"...";
+			// 
+			// label13
+			// 
+			this->label13->AutoSize = true;
+			this->label13->Font = (gcnew System::Drawing::Font(L"Elephant", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label13->Location = System::Drawing::Point(231, 481);
+			this->label13->Name = L"label13";
+			this->label13->Size = System::Drawing::Size(271, 31);
+			this->label13->TabIndex = 38;
+			this->label13->Text = L"Algorithm choosed: ";
+			//this->label13->Click += gcnew System::EventHandler(this, &MainForm::label13_Click);
+			// 
+			// algorithm_label
+			// 
+			this->algorithm_label->AutoSize = true;
+			this->algorithm_label->Font = (gcnew System::Drawing::Font(L"Elephant", 9.999999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->algorithm_label->ForeColor = System::Drawing::SystemColors::ActiveCaption;
+			this->algorithm_label->Location = System::Drawing::Point(499, 485);
+			this->algorithm_label->Name = L"algorithm_label";
+			this->algorithm_label->Size = System::Drawing::Size(30, 26);
+			this->algorithm_label->TabIndex = 39;
+			this->algorithm_label->Text = L"...";
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1536, 866);
-			this->Controls->Add(this->frame_start_game);
+			this->ClientSize = System::Drawing::Size(1663, 982);
+			this->Controls->Add(this->algorithm_label);
+			this->Controls->Add(this->label13);
+			this->Controls->Add(this->ai_choice_label);
+			this->Controls->Add(this->label12);
+			this->Controls->Add(this->label11);
+			this->Controls->Add(this->level_tree_user);
 			this->Controls->Add(this->label10);
 			this->Controls->Add(this->label9);
 			this->Controls->Add(this->label8);
@@ -524,6 +608,7 @@ namespace OOPFirst {
 			this->Controls->Add(this->frame_info);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->button1);
+			this->Controls->Add(this->frame_start_game);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Fixed3D;
 			this->Name = L"MainForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
@@ -545,6 +630,7 @@ namespace OOPFirst {
 	GameTree* root;
 	Player* human = new Player(0, 0);
 	Player* ai = new Player(0, 0);
+	int tree_level_user = 1; // game tree level
 
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		//Game g;
@@ -562,6 +648,8 @@ namespace OOPFirst {
 		grp_side_info->Clear(Color::SlateBlue);
 		System::String^ user_input = textBox1->Text;
 		Int32::TryParse(user_input, g->random_array_size);
+		user_input = level_tree_user->Text;
+		Int32::TryParse(user_input, tree_level_user);
 		g->randoms = g->GenerateRandomNums(g->random_array_size);
 		g->PrintIntVector(grp_info, g->randoms, (frame_info->Width) / 10, (frame_info->Height) / 2, 0, 0, 0);
 		
@@ -569,7 +657,7 @@ namespace OOPFirst {
 		root = new GameTree(g->randoms);
 
 		//root->FullfillGameTreeWithScoresMiniMax(root, g->randoms, (human->isFirstPlayer?0:1), 0, 0);
-		root->GameTreeCertainLevelWithScoresAlphaBeta(root, g->randoms,5, (human->isFirstPlayer ? 0 : 1), 0, 0);
+		root->GameTreeCertainLevelWithScoresAlphaBeta(root, g->randoms, tree_level_user-1, (human->isFirstPlayer ? 0 : 1), 0, 0);
 		root->isRoot = 1;
 		root->initialVectorSize = g->randoms.size();
 		//root->GameTreeCertainLevelWithScores(root,g->randoms, 1, 0, 0, 0);
@@ -577,19 +665,17 @@ namespace OOPFirst {
 		root->MarkLowestNodes(root);
 		root->RateGameTreeMiniMax(root, 0);
 		root->RateGameTreeAlphaBeta(root, 0);
-		root->current_node = new GameTree(root->data);
-		root->current_node->GameTreeCertainLevel(root->current_node, root->current_node->data, 1); // 0  level will display only root childs
+		root->current_node = new GameTree(root->data); // root->data == initial vector
+		root->current_node->GameTreeCertainLevel(root->current_node, root->current_node->data, tree_level_user-1); // 0  level will display only root childs
 		//root->GameTreeCertainLevel(root,root, g->randoms, 0); // 0  level will display only root childs
 		//root->PrintGameTree(grp, root, 0, (1280 - 50) / 3, 0);
-		root->PrintGameTreeUserScore(grp, root, 2, (1280 - 50) / 3, 0);
+		root->PrintGameTreeUserScore(grp, root, tree_level_user-1, (1280 - 50) / 3, 0);
 		mini_max_pred_label->Text = root->miniMaxValue.ToString();
 		alpha_beta_pred_label->Text = root->alphaBetaValue.ToString();
+		if (ai->isFirstPlayer) ai_turn(grp);
 	}
 	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
-		/*Game first;
-		Graphics^ grp = frame->CreateGraphics();
-		int g = rand() % 255;
-		first.draw(grp,"Hello",  0, 0, 0, g, 0);*/
+		//
 
 	}
 	private: System::Void frame_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -611,6 +697,7 @@ private: System::Void frame_start_game_Click(System::Object^ sender, System::Eve
 	PickPlayer^ pickPlayer = gcnew PickPlayer();
 	pickPlayer->ShowDialog();
 	//label1->Text = pickPlayer->player.ToString();
+	// 0 - human, 1 - ai
 	human->isFirstPlayer = (pickPlayer->player == 0) ? 1 : 0;
 	ai->isFirstPlayer = (pickPlayer->player == 0) ? 0 : 1;
 	ai->score = 0;
@@ -624,6 +711,17 @@ private: System::Void frame_start_game_Click(System::Object^ sender, System::Eve
 		ai->isCurrentPlayer = true;
 		max_player_label->Text = "MaxPlayer: AI";
 	}
+	// 0 - mini max, 1 - alphabeta
+	if (pickPlayer->algorithm == 0) {
+		algorithm_label->Text = "MiniMax";
+		ai->algorithm = 0;
+		human->algorithm = 0;
+	}
+	else {
+		algorithm_label->Text = "AlphaBeta";
+		ai->algorithm = 1;
+		human->algorithm = 1;
+	}
 }
 	   // user picks one of child nodes there 
 private: System::Void btn_user_number_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -633,29 +731,72 @@ private: System::Void btn_user_number_Click(System::Object^ sender, System::Even
 	//Game g;
 	Graphics^ grp = frame->CreateGraphics();
 	grp->Clear(Color::White);
+	std::vector<int> temp_data;
+	if (root->data.size() > 1) {
 
-	if (root->current_node->data.size() > 1) {
 		if (human->isCurrentPlayer) {
-			human->isCurrentPlayer = false;
-			ai->isCurrentPlayer = true;
-			human->AddPoint();
-			human_score->Text = human->score.ToString();
+			//human->isCurrentPlayer = false;
+			//ai->isCurrentPlayer = true;
+			human_turn(grp, user_number);
+			ai_turn(grp);
 		}
 		else {
-			ai->isCurrentPlayer = false;
-			human->isCurrentPlayer = true;
-			ai->AddPoint();
-			ai_score->Text = ai->score.ToString();
+			//ai->isCurrentPlayer = false;
+			//human->isCurrentPlayer = true;
+			
+			human_turn(grp, user_number);
+			ai_turn(grp);
+			
 		}
-		grp->Clear(Color::White);
-		std::vector<int> temp_data = root->current_node->children[user_number - 1]->data;
-		root->current_node->children.clear();
-		//root->current_node->GameTreeCertainLevelMiniMax(root->current_node, temp_data, 0); // 0  level will display only root childs
-		root->current_node->GameTreeCertainLevelWithScoresAlphaBeta(root->current_node, temp_data, 1, (human->isFirstPlayer ? 0 : 1), 0, 0);
-		root->current_node->data = temp_data;
-		// ai turn
+		//if (human->isCurrentPlayer) {
+		//	human->isCurrentPlayer = false;
+		//	ai->isCurrentPlayer = true;
+		//	if (user_number == root->current_node->children.size()&&root->current_node->data.size() % 2 == 1) {
+		//		ai->MinusPoint();
+		//		ai_score->Text = ai->score.ToString();
+		//	}
+		//	else {
+		//		human->AddPoint();
+		//	}
+		//	
+		//	human_score->Text = human->score.ToString();
 
-		root->PrintGameTree(grp, root->current_node, 0, (1280 - 50) / 3, 0);
+		//	grp->Clear(Color::White);
+		//	temp_data = root->current_node->children[user_number - 1]->data;
+		//	root->current_node->children.clear();
+		//	//root->current_node->GameTreeCertainLevelMiniMax(root->current_node, temp_data, 0); // 0  level will display only root childs
+		//	root->current_node->GameTreeCertainLevelWithScoresAlphaBeta(root->current_node, temp_data, 1, (human->isFirstPlayer ? 0 : 1), 0, 0);
+		//	root->current_node->data = temp_data;
+		//}
+
+
+		root->PrintGameTree(grp, root, 0, (1280 - 50) / 3, 0);
+		//ai_turn(grp);
+		//int ai_choice = 1;
+		//if (root->current_node->data.size() > 1) {
+		//	ai->isCurrentPlayer = false;
+		//	human->isCurrentPlayer = true;
+		//	
+		//	// ai automatic turn there
+		//	if (ai_choice == root->current_node->children.size() && root->current_node->data.size() % 2 == 1 && ai->isFirstPlayer==0) {
+		//		human->MinusPoint();
+		//		human_score->Text = human->score.ToString();
+		//	}
+		//	else {
+		//		ai->AddPoint();
+		//	}
+		//	ai_score->Text = ai->score.ToString();
+		//	grp->Clear(Color::White);
+		//	temp_data = root->current_node->children[ai_choice - 1]->data;
+		//	root->current_node->children.clear();
+		//	//root->current_node->GameTreeCertainLevelMiniMax(root->current_node, temp_data, 0); // 0  level will display only root childs
+		//	root->current_node->GameTreeCertainLevelWithScoresAlphaBeta(root->current_node, temp_data, 1, (human->isFirstPlayer ? 0 : 1), 0, 0);
+		//	root->current_node->data = temp_data;
+		//	// ai turn
+		//}
+
+
+		root->PrintGameTree(grp, root, 0, (1280 - 50) / 3, 0);
 		//root->PrintGameTreeUserScore(grp, root->current_node, 0, (1280 - 50) / 3, 0);
 	}
 	else {
@@ -681,6 +822,91 @@ private: System::Void btn_user_number_Click(System::Object^ sender, System::Even
 	
 	
 }
+
+void human_turn(Graphics^ grp, int user_number) {
+		   if (root->data.size() > 1) {
+			   human->isCurrentPlayer = false;
+			   ai->isCurrentPlayer = true;
+			   if (user_number == root->children.size() && root->data.size() % 2 == 1) {
+				   ai->MinusPoint();
+				   ai_score->Text = ai->score.ToString();
+			   }
+			   else {
+				   human->AddPoint();
+			   }
+
+			   human_score->Text = human->score.ToString();
+
+			   grp->Clear(Color::White);
+			   //std::vector<int> temp_data;
+			   //temp_data = root->current_node->children[user_number - 1]->data;
+			   //root->current_node->children.clear();
+			   ////root->current_node->GameTreeCertainLevelMiniMax(root->current_node, temp_data, 0); // 0  level will display only root childs
+			   //root->current_node->GameTreeCertainLevelWithScoresAlphaBeta(root->current_node, temp_data, 1, (human->isFirstPlayer ? 0 : 1), 0, 0);
+			   //root->current_node->data = temp_data;
+			   root = root->children[user_number - 1];
+		   }
+}
+
+void ai_turn(Graphics^ grp) {
+		   int ai_choice = 0;
+		   bool exists_win_path = 0;
+		   if (root->data.size() > 1) {
+			   ai->isCurrentPlayer = false;
+			   human->isCurrentPlayer = true;
+			   if (ai->algorithm == 1) {
+				   for (GameTree* child : root->children) {
+					   if (child->alphaBetaValue == -1) {
+						   ai_choice += 1;
+						   exists_win_path = 1;
+						   break;
+					   }
+					   else {
+						   ai_choice += 1;
+					   }
+				   }
+				   if (exists_win_path == 0) {
+					   ai_choice = 1;
+				   }
+			   }
+			   else {
+				   for (GameTree* child : root->children) {
+					   if (child->miniMaxValue == -1) {
+						   ai_choice += 1;
+						   exists_win_path = 1;
+						   break;
+					   }
+					   else {
+						   ai_choice += 1;
+					   }
+				   }
+				   if (exists_win_path == 0) {
+					   ai_choice = 1;
+				   }
+			   }
+
+			   // ai automatic turn there
+			   if (ai_choice == root->children.size() && root->data.size() % 2 == 1 && ai->isFirstPlayer == 0) {
+				   human->MinusPoint();
+				   human_score->Text = human->score.ToString();
+			   }
+			   else {
+				   ai->AddPoint();
+			   }
+			   ai_score->Text = ai->score.ToString();
+			   //grp->Clear(Color::White);
+			   ai_choice_label->Text = ai_choice.ToString();
+			   //std::vector<int> temp_data;
+			   //temp_data = root->current_node->children[ai_choice - 1]->data;
+			   //root->current_node->children.clear();
+			   ////root->current_node->GameTreeCertainLevelMiniMax(root->current_node, temp_data, 0); // 0  level will display only root childs
+			   //root->current_node->GameTreeCertainLevelWithScoresAlphaBeta(root->current_node, temp_data, 1, (human->isFirstPlayer ? 0 : 1), 0, 0);
+			   //root->current_node->data = temp_data;
+			   //// ai turn
+			   root = root->children[ai_choice - 1];
+		   }
+}
+
 private: System::Void frame_info_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void max_player_label_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -695,5 +921,10 @@ private: System::Void label7_Click(System::Object^ sender, System::EventArgs^ e)
 }
 private: System::Void label10_Click(System::Object^ sender, System::EventArgs^ e) {
 }
+private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void label12_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+
 };
 }

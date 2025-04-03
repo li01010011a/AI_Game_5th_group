@@ -128,7 +128,7 @@ void GameTree::FullfillGameTreeWithScores(GameTree* node, std::vector<int> data,
         temporary.erase(temporary.begin() + i + 1);
 		GameTree* PositiveChild = new GameTree(temporary);
         
-		if (firstPlayer == 0) {
+		if (firstPlayer == 0) { // 0 - human
 			PositiveChild->nodeValueForHuman = 1 + currentNodeValueForHuman;
 			PositiveChild->nodeValueForAI = currentNodeValueForAI;    
 		}

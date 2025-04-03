@@ -9,6 +9,7 @@ public:
 	int score = 0;
 	bool isFirstPlayer = 0; //1 for Max Player
 	bool isCurrentPlayer;
+	int algorithm;
 	int winCount=0;
 	Player(int score, bool isFirstPlayer) {
 		this->score = score;
