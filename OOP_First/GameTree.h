@@ -14,6 +14,7 @@ public:
     int nodeValueForAI = 0;
 	int nodeValueForHuman = 0;
     int isRoot;
+    int tree_level = 2;
     GameTree* current_node;
 	GameTree* parent_node;
     int isWinPath = 0;
